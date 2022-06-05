@@ -1,6 +1,7 @@
 <template>
   
-<div id="nav" class="d-flex justify-content-between align-items-center px-2 py-2 px-1">
+<div id="nav">
+  <div class="nav-container d-flex justify-content-between align-items-center py-2">
   <div class="logo-container">
     <h4>RECOMMEND.</h4>
   </div>
@@ -9,7 +10,10 @@
      <router-link to="/">Home</router-link> 
       <router-link to="/about">About</router-link>
   </div>
+  
   </div>
+  </div>
+
 
 </template>
 
@@ -33,6 +37,11 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #dc0037;
+}
+
+.nav-container {
+  width: 90%;
+  margin: auto;
 }
 
 </style>
