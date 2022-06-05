@@ -6,7 +6,7 @@
   </div>
   
   <div class="list-container">
-     <router-link to="/">Home</router-link> |
+     <router-link to="/">Home</router-link> 
       <router-link to="/about">About</router-link>
   </div>
   </div>
@@ -22,6 +22,17 @@ export default {
 <style scoped>
 #nav {
   background-color: #ffe0e8;
+}
+
+#nav a {
+  color: #fa5b83;
+  text-decoration: none;
+  font-size: 1em;
+  margin-right: 10px;
+}
+
+#nav a.router-link-exact-active {
+  color: #dc0037;
 }
 
 </style>
