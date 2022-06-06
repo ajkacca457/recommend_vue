@@ -37,10 +37,12 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #dc0037;
+  text-decoration: underline;
 }
 
 .nav-container {
   width: 90%;
+  max-width: 1600px;
   margin: auto;
 }
 
