@@ -1,7 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <h1 class="bg-danger text-white">{{message}}</h1>
+    <h1 class="bg-danger text-white text-center">{{message}}</h1>
   </div>
 </template>
 
