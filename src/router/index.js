@@ -3,7 +3,7 @@ import Home from '../views/Home.vue'
 import Login from "../views/Login.vue"
 import Register from "../views/Register.vue"
 import Mycollections from "../views/Mycollections.vue"
-import Createrecommendation from "../views/Createrecommendation.vue"
+import Createcollection from "../views/Createcollection.vue"
 
 
 const routes = [
@@ -27,7 +27,14 @@ const routes = [
     path: "/mycollections",
     name:"Mycollections",
     component: Mycollections
+  },
+  {
+    path:"/createcollection",
+    name:"Createcollection",
+    component:Createcollection
   }
+
+
   //, {
   //   path: '/about',
   //   name: 'About',
