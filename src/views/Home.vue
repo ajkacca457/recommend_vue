@@ -1,14 +1,18 @@
 <template>
   <div class="home">
-    <h1 class="bg-danger text-white text-center">{{message}}</h1>
+    <Reccollections/>
   </div>
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
+import { ref } from '@vue/reactivity';
+import Reccollections from "../components/Reccollections.vue";
 
 export default {
   name: 'Home',
+  components: {
+    Reccollections
+  },
   setup() {
     let message= ref("Project Under construction");
     return{
@@ -17,3 +21,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.home { 
+  width: 90%;
+  max-width: 1600px;
+  margin: 1% auto;
+}
+
+
+</style>

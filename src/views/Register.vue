@@ -80,7 +80,6 @@
 export default {
     name:"Register"
 
-
 }
 </script>
 
