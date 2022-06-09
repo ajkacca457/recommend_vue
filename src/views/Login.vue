@@ -1,6 +1,6 @@
 <template>
   
-<form class="w-25 my-5 mx-auto" id="loginform">
+<form class="w-25 my-5 mx-auto" id="loginform" @submit.prevent="handleLogin">
 
 <div class="logo d-flex align-items-center justify-content-center">
 <font-awesome-icon icon="arrow-right-to-bracket"/>
@@ -9,18 +9,18 @@
 
   <!-- Email input -->
   <div class="form-outline mb-4">
-    <input type="email" id="form2Example1" class="form-control" />
+    <input type="email" id="form2Example1" class="form-control" v-model="email" />
     <label class="form-label" for="form2Example1">Email address</label>
   </div>
 
   <!-- Password input -->
   <div class="form-outline mb-4">
-    <input type="password" id="form2Example2" class="form-control" />
+    <input type="password" id="form2Example2" class="form-control"  v-model="password"/>
     <label class="form-label" for="form2Example2">Password</label>
   </div>
 
   <!-- Submit button -->
-  <button type="button" class="btn btn-primary btn-block mb-4 w-100">Sign in</button>
+  <input type="submit" class="btn btn-primary btn-block mb-4 w-100">
 
   <!-- Register buttons -->
   <div class="text-center">
@@ -31,8 +31,22 @@
 </template>
 
 <script>
+import { ref } from '@vue/reactivity'
 export default {
-    name:"Login"
+    name:"Login",
+    setup() {
+      let email= ref("");
+      let password=ref("");
+
+      let handleLogin= ()=> {
+        console.log(email.value,password.value);
+      }
+
+    return {
+      email,password,handleLogin
+    }
+
+    }
 }
 </script>
 
