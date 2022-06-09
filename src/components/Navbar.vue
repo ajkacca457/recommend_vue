@@ -7,11 +7,17 @@
   </div>
   
   <div class="list-container">
+    <div v-if="isLoggedIn">
       <router-link to="/"><font-awesome-icon icon="house" style="margin-right:5px" />Home</router-link> 
       <router-link :to="{name:'Mycollections'}"><font-awesome-icon icon="archive" style="margin-right:5px"/>My Collections</router-link> 
       <router-link :to="{name:'Createcollection'}"><font-awesome-icon icon="plus" style="margin-right:5px"/>Create Collection</router-link> 
+    </div>
+      <div v-else>
       <router-link :to="{name:'Login'}">Login</router-link>
       <router-link :to="{name:'Register'}">Register</router-link>
+
+      </div>
+
   </div>
   
   </div>
@@ -21,9 +27,24 @@
 </template>
 
 <script>
+import { ref } from '@vue/reactivity'
+
 export default {
-        name:"Navbar"
+  name:"Navbar",
+    setup() {
+
+      let isLoggedIn= ref(false);
+
+      return {
+        isLoggedIn
+      }
+
+
+      }
 }
+
+
+
 </script>
 
 <style scoped>
