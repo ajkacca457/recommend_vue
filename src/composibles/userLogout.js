@@ -1,7 +1,7 @@
 import { ref } from "vue";
 
 let error= ref(null);
-let register= async()=> {
+let logout= async()=> {
 error.value= null
     try {
         
@@ -11,11 +11,11 @@ error.value= null
 
 }
 
-let userRegister=()=> {
+let userLogout=()=> {
     return {
         error,
-        register
+        logout
     }
 }
 
-export default userRegister;
+export default userLogout;
