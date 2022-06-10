@@ -1,6 +1,9 @@
 import { ref } from "vue";
 
 let error= ref(null);
+let isPending= ref(false);
+
+
 let register= async()=> {
 error.value= null
     try {
@@ -14,6 +17,7 @@ error.value= null
 let userRegister=()=> {
     return {
         error,
+        isPending,
         register
     }
 }

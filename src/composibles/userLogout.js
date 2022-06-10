@@ -1,6 +1,7 @@
 import { ref } from "vue";
 
 let error= ref(null);
+let  isPending= ref(false);
 let logout= async()=> {
 error.value= null
     try {
@@ -14,6 +15,7 @@ error.value= null
 let userLogout=()=> {
     return {
         error,
+        isPending,
         logout
     }
 }
