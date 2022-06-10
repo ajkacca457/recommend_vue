@@ -1,5 +1,11 @@
 <template>
   
+<div v-if="isPending" class="text-center mt-5">
+  <img src="../assets/img/Hourglass.gif" alt="">
+</div>
+
+<div v-else>
+
 <form class="w-25 my-5 mx-auto" id="loginform" @submit.prevent="handleLogin">
 
 <div class="logo d-flex align-items-center justify-content-center">
@@ -22,28 +28,41 @@
   <!-- Submit button -->
   <input type="submit" class="btn btn-primary btn-block mb-4 w-100">
 
+  <div v-if="error" class="text-center text-danger text-decoration-underline mb-3">{{error}}</div>
+
   <!-- Register buttons -->
   <div class="text-center">
-    <p>Not a member? <a href="#!">Register</a></p>
+    <p>Not a member? <router-link :to="{'name':'Register'}">Register</router-link></p>
   </div>
 </form>
+
+</div>
+
+
 
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
+import { ref } from '@vue/reactivity';
+import userLogin from "../composibles/userLogin";
 export default {
     name:"Login",
     setup() {
+
+      let {error,isPending, login}= userLogin();
+
       let email= ref("");
       let password=ref("");
 
-      let handleLogin= ()=> {
-        console.log(email.value,password.value);
+      let handleLogin= async()=> {
+        let res= await login(email.value,password.value);
+        if(!error.value) {
+          console.log(res);
+        }
       }
 
     return {
-      email,password,handleLogin
+      email,password,handleLogin,error,isPending
     }
 
     }

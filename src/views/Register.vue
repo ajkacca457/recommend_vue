@@ -1,6 +1,10 @@
 <template>
-    
-<section>
+
+<div v-if="isPending" class="text-center mt-5">
+  <img src="../assets/img/Hourglass.gif" alt="loading">
+</div>
+
+<section v-else>
   <div class="container py-5">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-lg-12 col-xl-11">
@@ -49,6 +53,11 @@
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <input type="submit" class="btn btn-primary btn-lg">
                   </div>
+                <!-- if error exists  -->
+
+                <div v-if="error" class="text-center text-danger text-decoration-underline">
+                      {{error}}
+                  </div>
 
                 </form>
 
@@ -70,21 +79,28 @@
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
+import { ref } from '@vue/reactivity';
+import userRegister from "../composibles/userRegister";
 export default {
     name:"Register",
     setup() {
+
+      let {error, isPending, register}= userRegister();
+
       let name=ref("");
       let email= ref("");
       let password=ref("");
       let repeatPassword=ref("");
 
-      let handleRegister=()=> {
-        console.log(name.value,email.value,password.value,repeatPassword.value);
+      let handleRegister=async()=> {
+        let res= await register(email.value,password.value,name.value);
+        if(!error.value) {
+          console.log(res);
+        }
       }
 
       return {
-        name,email,password,repeatPassword,handleRegister
+        name,email,password,repeatPassword,handleRegister,error,isPending
       }
 
 

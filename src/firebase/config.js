@@ -1,4 +1,4 @@
-import {initialzeApp} from "firebase/app";
+import {initializeApp} from "firebase/app";
 import {getFirestore, collection} from "firebase/firestore";
 
 const firebaseConfig = {
@@ -11,7 +11,7 @@ const firebaseConfig = {
     measurementId: "G-FF12XC74C6"
   };
 
-const app= initialzeApp(firebaseConfig);
+const app= initializeApp(firebaseConfig);
 const db= getFirestore();
 
-export {db};
+export {app,db};

@@ -33,7 +33,7 @@ export default {
   name:"Navbar",
     setup() {
 
-      let isLoggedIn= ref(true);
+      let isLoggedIn= ref(false);
 
       return {
         isLoggedIn
