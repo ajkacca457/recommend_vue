@@ -45,6 +45,8 @@
 <script>
 import { ref } from '@vue/reactivity';
 import userLogin from "../composibles/userLogin";
+import { useRouter} from "vue-router";
+
 export default {
     name:"Login",
     setup() {
@@ -54,10 +56,13 @@ export default {
       let email= ref("");
       let password=ref("");
 
+      let router= useRouter();
+
       let handleLogin= async()=> {
         let res= await login(email.value,password.value);
         if(!error.value) {
           console.log(res);
+          router.push({name:"Home"});
         }
       }
 

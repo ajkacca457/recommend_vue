@@ -97,7 +97,7 @@ export default {
       let password=ref("");
       let repeatPassword=ref("");
 
-      let handleRegister=async()=> {
+      let handleRegister= async()=> {
         if(password.value!==repeatPassword.value) { 
           let errorDiv= document.querySelector("#errorDiv");
           errorDiv.classList.remove("d-none");
