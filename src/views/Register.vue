@@ -50,14 +50,19 @@
                     </div>
                   </div>
 
+                    <!-- if password doesnt match  -->
+                  <div class="text-center bg-danger text-white py-2 rounded d-none mb-3" id="errorDiv">
+                      Please confirm your password. 
+                  </div>
+
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <input type="submit" class="btn btn-primary btn-lg">
                   </div>
-                <!-- if error exists  -->
 
+                <!-- if error exists  -->
                 <div v-if="error" class="text-center text-danger text-decoration-underline">
                       {{error}}
-                  </div>
+                </div>
 
                 </form>
 
@@ -93,10 +98,20 @@ export default {
       let repeatPassword=ref("");
 
       let handleRegister=async()=> {
+        if(password.value!==repeatPassword.value) { 
+          let errorDiv= document.querySelector("#errorDiv");
+          errorDiv.classList.remove("d-none");
+          setTimeout(()=> {
+            errorDiv.classList.add("d-none");
+          },1000)
+
+        } else {
         let res= await register(email.value,password.value,name.value);
         if(!error.value) {
           console.log(res);
         }
+        }
+
       }
 
       return {
