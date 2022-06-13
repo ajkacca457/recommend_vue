@@ -86,6 +86,7 @@
 <script>
 import { ref } from '@vue/reactivity';
 import userRegister from "../composibles/userRegister";
+import { useRouter } from 'vue-router';
 export default {
     name:"Register",
     setup() {
@@ -96,6 +97,8 @@ export default {
       let email= ref("");
       let password=ref("");
       let repeatPassword=ref("");
+
+      let router= useRouter();
 
       let handleRegister= async()=> {
         if(password.value!==repeatPassword.value) { 
@@ -108,7 +111,7 @@ export default {
         } else {
         let res= await register(email.value,password.value,name.value);
         if(!error.value) {
-          console.log(res);
+          router.push({name:"Home"});
         }
         }
 
