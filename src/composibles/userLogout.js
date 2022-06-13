@@ -1,23 +1,31 @@
+import { async } from "@firebase/util";
+import { getAuth, signOut } from "firebase/auth";
 import { ref } from "vue";
 
+
 let error= ref(null);
-let  isPending= ref(false);
+
 let logout= async()=> {
-error.value= null
+    error.value= null;
+
     try {
-        
-    } catch (error) {
-        
+        let auth=getAuth();
+        await signOut(auth);  
+        error.value= null;
+    } catch (err) {
+        error.value=err.message;
+
     }
 
 }
 
-let userLogout=()=> {
+let userLogout= ()=> {
+
     return {
         error,
-        isPending,
         logout
     }
 }
+
 
 export default userLogout;

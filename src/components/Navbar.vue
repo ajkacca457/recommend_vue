@@ -10,7 +10,8 @@
     <div v-if="isLoggedIn">
       <router-link to="/"><font-awesome-icon icon="house" style="margin-right:5px" />Home</router-link> 
       <router-link :to="{name:'Mycollections'}"><font-awesome-icon icon="archive" style="margin-right:5px"/>My Collections</router-link> 
-      <router-link :to="{name:'Createcollection'}"><font-awesome-icon icon="plus" style="margin-right:5px"/>Create Collection</router-link> 
+      <router-link :to="{name:'Createcollection'}"><font-awesome-icon icon="plus" style="margin-right:5px"/>Create Collection</router-link>
+      <button id="logout" @click="handleLogout"><font-awesome-icon icon="right-from-bracket" style="margin-right:5px" />logout</button> 
     </div>
       <div v-else>
       <router-link :to="{name:'Login'}">Login</router-link>
@@ -27,16 +28,26 @@
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
-
+import { ref } from '@vue/reactivity';
+import userLogout from "../composibles/userLogout";
 export default {
   name:"Navbar",
     setup() {
 
-      let isLoggedIn= ref(false);
+      let {error, logout} = userLogout();
+
+
+      let isLoggedIn= ref(true);
+
+      let handleLogout= async()=> {
+          await logout();
+          isLoggedIn.value= false;
+      }
+
 
       return {
-        isLoggedIn
+        isLoggedIn,
+        handleLogout
       }
 
 
@@ -68,6 +79,20 @@ export default {
   width: 90%;
   max-width: 1600px;
   margin: auto;
+}
+
+#logout {
+  background-color:transparent;
+  color: #fa5b83;
+  border: 1px solid #fa5b83;
+  border-radius: 5px;
+  transition: all 0.2s ease-in;
+  
+}
+
+#logout:hover {
+  color: #dc0037;
+  border: 1px solid #dc0037;
 }
 
 </style>
