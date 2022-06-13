@@ -8,6 +8,7 @@
     </div>
     
     <div v-else>
+    <h6>Movies</h6>
     <div class="col_container">
         <div v-for="doc in documents" :key="doc.id">
           <RecommendationCard :recommendation="doc"/>
@@ -25,6 +26,7 @@
 import getCurrentUser from "../composibles/getcurrentUser";
 import getCollections from "../composibles/getCollections";
 import RecommendationCard from "./RecommendationCard.vue";
+import { computed } from '@vue/runtime-core';
 
 export default {
 
@@ -38,14 +40,23 @@ export default {
     let {user}= getCurrentUser(); 
 
     let {error, isPending, documents}= getCollections();
+    
+    let moviesDocuments= computed(()=> {
+      if(documents.value) {
+        return documents.value.filter((item)=> {
+          return item.category==="Movies"
+        })
+      }
+    })
 
-    console.log(user);
+    console.log(moviesDocuments);
 
     return {
       user,
       error,
       isPending,
-      documents
+      documents,
+      moviesDocuments
     }
 
   }
