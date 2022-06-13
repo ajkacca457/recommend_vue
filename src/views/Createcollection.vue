@@ -43,24 +43,26 @@ import { ref } from '@vue/reactivity';
 import createCollection from '../composibles/createCollection';
 import getCurrentUser from "../composibles/getcurrentUser";
 import { useRouter } from 'vue-router';
+import { serverTimestamp } from "firebase/firestore";
 export default {
     name:"Createcollection",
     setup() {
       let {error, addCollection}= createCollection();
       let {user}= getCurrentUser();
+      let router= useRouter();
 
       let collectionName=ref("");
       let collectionInfo=ref("");
       let category=ref("");
 
-      let router= useRouter();
 
       let handleCollection= async()=> {
         let collection = {
           name:collectionName.value,
           info: collectionInfo.value,
           category:category.value,
-          creator: user.value.displayName
+          creator: user.value.displayName,
+          createdAt:serverTimestamp()
         }
 
        let res= await addCollection(collection);
