@@ -1,10 +1,10 @@
 <template>
-    <div class="mb-3 p-3 ">
-            <h2>{{recommendation.name}}</h2>
-            <p>{{recommendation.info}}</p>
-            <p>{{recommendation.category}}</p>
-            <p>{{recommendation.creator}}</p>
-            <p>{{recommendation.createdAt}}</p>
+    <div class="mb-3 p-3 rounded h-100" id="card">
+            <h3 class="text-decoration-underline">{{recommendation.name}}</h3>
+            <p class="m-0"><strong>Excerpt:</strong> {{recommendation.info}}</p>
+            <p class="m-0"><strong>Category:</strong> {{recommendation.category}}</p>
+            <p class="m-0"><strong>Created By:</strong> {{recommendation.creator}}</p>
+            <p class="m-0">{{recommendation.createdAt}}</p>
     </div>
 
 
@@ -28,6 +28,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+#card {
+   background-color: #ffe0e8;
+}
+
+
 
 </style>
