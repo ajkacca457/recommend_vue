@@ -1,4 +1,3 @@
-import { async } from "@firebase/util";
 import { getAuth, signOut } from "firebase/auth";
 import { ref } from "vue";
 

@@ -39,20 +39,35 @@
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
+import { ref } from '@vue/reactivity';
+import createCollection from '../composibles/createCollection';
+import getCurrentUser from "../composibles/getcurrentUser";
 export default {
     name:"Createcollection",
     setup() {
+      let {error, addCollection}= createCollection();
+      let {user}= getCurrentUser();
+
       let collectionName=ref("");
       let collectionInfo=ref("");
       let category=ref("");
 
-      let handleCollection=()=> {
-        console.log(collectionName.value,collectionInfo.value,category.value);
+      let handleCollection= async()=> {
+        let collection = {
+          name:collectionName.value,
+          info: collectionInfo.value,
+          category:category.value,
+          creator: user.value.displayName
+        }
+
+       let res= await addCollection(collection);
+        if (error.value) {
+          console.log(error.value);
+        }
       }
 
       return {
-        collectionName,collectionInfo,category,handleCollection
+        collectionName,collectionInfo,category,handleCollection,error
       }
 
     }

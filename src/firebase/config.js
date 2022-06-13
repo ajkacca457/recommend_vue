@@ -13,5 +13,6 @@ const firebaseConfig = {
 
 const app= initializeApp(firebaseConfig);
 const db= getFirestore();
+const RecCollectionRef= collection(db, "reccollection");
 
-export {app,db};
+export {app,db, RecCollectionRef};
