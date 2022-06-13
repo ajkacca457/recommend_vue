@@ -42,6 +42,7 @@
 import { ref } from '@vue/reactivity';
 import createCollection from '../composibles/createCollection';
 import getCurrentUser from "../composibles/getcurrentUser";
+import { useRouter } from 'vue-router';
 export default {
     name:"Createcollection",
     setup() {
@@ -52,6 +53,8 @@ export default {
       let collectionInfo=ref("");
       let category=ref("");
 
+      let router= useRouter();
+
       let handleCollection= async()=> {
         let collection = {
           name:collectionName.value,
@@ -61,8 +64,8 @@ export default {
         }
 
        let res= await addCollection(collection);
-        if (error.value) {
-          console.log(error.value);
+        if (!error.value) {
+          router.push({name:"Home"})
         }
       }
 
