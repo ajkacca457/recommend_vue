@@ -8,9 +8,32 @@
     </div>
     
     <div v-else>
-    <h6>Movies</h6>
+    <h6><strong>Movies</strong></h6>
     <div class="col_container">
-        <div v-for="doc in documents" :key="doc.id">
+        <div v-for="doc in moviesDocuments" :key="doc.id">
+          <RecommendationCard :recommendation="doc"/>
+        </div>
+    </div>
+    <hr>
+    <h6> <strong>Books</strong></h6>
+    <div class="col_container">
+        <div v-for="doc in booksDocuments" :key="doc.id">
+          <RecommendationCard :recommendation="doc"/>
+        </div>
+    </div>
+
+    <hr>
+    <h6> <strong>Music</strong></h6>
+    <div class="col_container">
+        <div v-for="doc in musicDocuments" :key="doc.id">
+          <RecommendationCard :recommendation="doc"/>
+        </div>
+    </div>
+
+    <hr>
+    <h6> <strong>Sports</strong></h6>
+    <div class="col_container">
+        <div v-for="doc in sportsDocuments" :key="doc.id">
           <RecommendationCard :recommendation="doc"/>
         </div>
     </div>
@@ -49,14 +72,39 @@ export default {
       }
     })
 
-    console.log(moviesDocuments);
+    let booksDocuments= computed(()=> {
+      if(documents.value) {
+        return documents.value.filter((item)=> {
+          return item.category==="Books"
+        })
+      } 
+    })
+
+    let musicDocuments= computed(()=> {
+      if(documents.value) {
+          return documents.value.filter((item)=> {
+            return item.category==="music"
+          })
+      }
+    })
+
+    let sportsDocuments= computed(()=> {
+      if(documents.value) {
+        return documents.value.filter((item)=> {
+          return item.category==="Sports Events"
+        })
+      }
+    })
 
     return {
       user,
       error,
       isPending,
       documents,
-      moviesDocuments
+      moviesDocuments,
+      booksDocuments,
+      musicDocuments,
+      sportsDocuments
     }
 
   }
