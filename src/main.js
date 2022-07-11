@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import "./style.css";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -16,4 +18,13 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 /* add icons to the library */
 library.add(fas,far);
 
-createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(router).mount('#app')
+let auth= getAuth();
+
+let app;
+
+onAuthStateChanged(auth,()=> {
+    if(!app) {
+        app=createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(router).mount('#app');
+    }
+})
+

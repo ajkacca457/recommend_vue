@@ -5,6 +5,7 @@ import Register from "../views/Register.vue"
 import Mycollections from "../views/Mycollections.vue"
 import Createcollection from "../views/Createcollection.vue"
 import {getAuth} from "firebase/auth";
+import { app } from '../firebase/config'
 
 
 const routeProtection=(to,from,next)=> {
@@ -19,6 +20,18 @@ const routeProtection=(to,from,next)=> {
 
 }
 
+const protectionUnrequired= (to,from,next)=> {
+
+  let auth= getAuth();
+
+  if(auth.currentUser) {
+    next({name:"Home"})
+  } else {
+    next();
+  }
+
+
+}
 
 
 const routes = [
@@ -30,13 +43,15 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    beforeEnter:protectionUnrequired
   },
 
   {
     path:"/register",
     name:"Register",
-    component:Register
+    component:Register,
+    beforeEnter:protectionUnrequired
   },
   {
     path: "/mycollections",
