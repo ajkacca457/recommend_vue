@@ -4,6 +4,21 @@ import Login from "../views/Login.vue"
 import Register from "../views/Register.vue"
 import Mycollections from "../views/Mycollections.vue"
 import Createcollection from "../views/Createcollection.vue"
+import {getAuth} from "firebase/auth";
+
+
+const routeProtection=(to,from,next)=> {
+
+  let auth= getAuth();
+
+  if(!auth.currentUser) {
+    next({name:"Home"})
+  } else {
+    next()
+  }
+
+}
+
 
 
 const routes = [
@@ -26,12 +41,14 @@ const routes = [
   {
     path: "/mycollections",
     name:"Mycollections",
-    component: Mycollections
+    component: Mycollections,
+    beforeEnter: routeProtection
   },
   {
     path:"/createcollection",
     name:"Createcollection",
-    component:Createcollection
+    component:Createcollection,
+    beforeEnter: routeProtection
   }
 
 
