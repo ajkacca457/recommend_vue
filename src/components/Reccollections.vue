@@ -50,6 +50,7 @@ import getCurrentUser from "../composibles/getcurrentUser";
 import getCollections from "../composibles/getCollections";
 import RecommendationCard from "./RecommendationCard.vue";
 import { computed } from '@vue/runtime-core';
+import {formatDistance} from "date-fns";
 
 export default {
 
@@ -63,7 +64,8 @@ export default {
     let {user}= getCurrentUser(); 
 
     let {error, isPending, documents}= getCollections();
-    
+
+
     let moviesDocuments= computed(()=> {
       if(documents.value) {
         return documents.value.filter((item)=> {
@@ -71,6 +73,7 @@ export default {
         })
       }
     })
+
 
     let booksDocuments= computed(()=> {
       if(documents.value) {

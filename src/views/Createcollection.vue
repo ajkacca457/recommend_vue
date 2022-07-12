@@ -52,6 +52,7 @@ import createCollection from '../composibles/createCollection';
 import getCurrentUser from "../composibles/getcurrentUser";
 import { useRouter } from 'vue-router';
 import { serverTimestamp } from "firebase/firestore";
+import updateStorage from "../composibles/updateStorage";
 export default {
     name:"Createcollection",
     setup() {
@@ -59,26 +60,36 @@ export default {
       let {user}= getCurrentUser();
       let router= useRouter();
 
+      let {url,filePath, uploadImage}= updateStorage();
+
       let collectionName=ref("");
       let collectionInfo=ref("");
       let category=ref("");
       let file= ref(null);
       let fileError=ref(null);
 
-
       let handleCollection= async()=> {
+       
+       if(file.value) {
+          await uploadImage(file);
+          console.log("image uploaded");
+
         let collection = {
           name:collectionName.value,
           info: collectionInfo.value,
           category:category.value,
           creator: user.value.displayName,
+          imageUrl: url.value,
+          filePath:filePath.value,
+          recommendations: [],
           createdAt:serverTimestamp()
         }
 
-       let res= await addCollection(collection);
+        let res= await addCollection(collection);
         if (!error.value) {
           router.push({name:"Home"})
         }
+       }
       }
 
     let handleFile=(e)=> {
@@ -94,7 +105,6 @@ export default {
 
 
     }
-
 
 
       return {
