@@ -31,6 +31,14 @@
       </select>
     </div>
 
+<!--input group 4 -->
+
+  <div class="form-outline mb-4">
+    <label class="form-label" for="coldescription">Upload Collection Cover-Image</label>
+    <input type="file" class="form-control" id="colfile" @change="handleFile">
+    <p class="text-danger">{{fileError}}</p>
+  </div>
+
   <!-- Submit button -->
   <input type="submit" class="btn btn-primary btn-block mb-4 w-100" key=""/>
 
@@ -54,6 +62,8 @@ export default {
       let collectionName=ref("");
       let collectionInfo=ref("");
       let category=ref("");
+      let file= ref(null);
+      let fileError=ref(null);
 
 
       let handleCollection= async()=> {
@@ -71,8 +81,24 @@ export default {
         }
       }
 
+    let handleFile=(e)=> {
+      let fileTypes=["image/jpeg","image/png"];
+      let selected= e.target.files[0];
+      if(selected && fileTypes.includes(selected.type)) {
+        file.value=selected;
+        fileError.value=null;
+      } else {
+        file.value= null;
+        fileError.value="Please uplaod a supported file";
+      }
+
+
+    }
+
+
+
       return {
-        collectionName,collectionInfo,category,handleCollection,error
+        collectionName,collectionInfo,category,handleCollection,error,handleFile,fileError
       }
 
     }

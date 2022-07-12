@@ -1,5 +1,6 @@
 import {initializeApp} from "firebase/app";
 import {getFirestore, collection} from "firebase/firestore";
+import {getStorage} from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAcnQrWp5dfkVF_gIhQL9zvUC8ppfgOfEg",
@@ -11,8 +12,18 @@ const firebaseConfig = {
     measurementId: "G-FF12XC74C6"
   };
 
+  // App initialization
 const app= initializeApp(firebaseConfig);
+
+
+// Database creation 
 const db= getFirestore();
 const RecCollectionRef= collection(db, "reccollection");
 
-export {app,db, RecCollectionRef};
+
+// storage creation
+
+ const projectStorage= getStorage(); 
+
+
+export {app,db, RecCollectionRef, projectStorage};
