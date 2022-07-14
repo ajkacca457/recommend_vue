@@ -15,7 +15,7 @@ const updateStorage=()=> {
             const imageRef= storageRef(projectStorage,filePath.value); 
 
             try {
-                let res= await uploadBytes(imageRef,file);
+                let res= await uploadBytes(imageRef,file.value);
                 url.value= await getDownloadURL(imageRef,filePath.value);
                 error.value=null;
 

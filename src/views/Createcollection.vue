@@ -78,6 +78,7 @@ export default {
           name:collectionName.value,
           info: collectionInfo.value,
           category:category.value,
+          userId:user.value.uid,
           creator: user.value.displayName,
           imageUrl: url.value,
           filePath:filePath.value,
@@ -93,9 +94,9 @@ export default {
       }
 
     let handleFile=(e)=> {
-      let fileTypes=["image/jpeg","image/png"];
+      // let fileTypes=["image/jpeg","image/jpg","image/png"] && fileTypes.includes(selected.type);
       let selected= e.target.files[0];
-      if(selected && fileTypes.includes(selected.type)) {
+      if(selected) {
         file.value=selected;
         fileError.value=null;
       } else {

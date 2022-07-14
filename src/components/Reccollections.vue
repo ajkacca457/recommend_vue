@@ -98,7 +98,7 @@ export default {
     let musicDocuments= computed(()=> {
       if(properTimeDocuments.value) {
           return properTimeDocuments.value.filter((item)=> {
-            return item.category==="music"
+            return item.category==="Music"
           })
       }
     })
