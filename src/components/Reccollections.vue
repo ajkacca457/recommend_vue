@@ -50,7 +50,7 @@ import getCurrentUser from "../composibles/getcurrentUser";
 import getCollections from "../composibles/getCollections";
 import RecommendationCard from "./RecommendationCard.vue";
 import { computed } from '@vue/runtime-core';
-import {formatDistance} from "date-fns";
+import {formatDistanceToNow} from "date-fns";
 
 export default {
 
@@ -66,9 +66,21 @@ export default {
     let {error, isPending, documents}= getCollections();
 
 
-    let moviesDocuments= computed(()=> {
+    let properTimeDocuments= computed(()=> {
+
       if(documents.value) {
-        return documents.value.filter((item)=> {
+        return documents.value.map((item)=> {
+          let time= formatDistanceToNow(item.createdAt.toDate());
+          return {
+            ...item, createdAt:time
+          }
+        })
+      }
+    })
+
+    let moviesDocuments= computed(()=> {
+      if(properTimeDocuments.value) {
+        return properTimeDocuments.value.filter((item)=> {
           return item.category==="Movies"
         })
       }
@@ -76,24 +88,24 @@ export default {
 
 
     let booksDocuments= computed(()=> {
-      if(documents.value) {
-        return documents.value.filter((item)=> {
+      if(properTimeDocuments.value) {
+        return properTimeDocuments.value.filter((item)=> {
           return item.category==="Books"
         })
       } 
     })
 
     let musicDocuments= computed(()=> {
-      if(documents.value) {
-          return documents.value.filter((item)=> {
+      if(properTimeDocuments.value) {
+          return properTimeDocuments.value.filter((item)=> {
             return item.category==="music"
           })
       }
     })
 
     let sportsDocuments= computed(()=> {
-      if(documents.value) {
-        return documents.value.filter((item)=> {
+      if(properTimeDocuments.value) {
+        return properTimeDocuments.value.filter((item)=> {
           return item.category==="Sports Events"
         })
       }
