@@ -5,7 +5,8 @@ import Register from "../views/Register.vue"
 import Mycollections from "../views/Mycollections.vue"
 import Createcollection from "../views/Createcollection.vue"
 import {getAuth} from "firebase/auth";
-import { app } from '../firebase/config'
+import { app } from '../firebase/config';
+import RecommendationDetail from "../views/RecommendationDetail";
 
 
 const routeProtection=(to,from,next)=> {
@@ -64,6 +65,13 @@ const routes = [
     name:"Createcollection",
     component:Createcollection,
     beforeEnter: routeProtection
+  },
+  {
+    path:"/recommendations/:id",
+    name:"RecommendationDetail",
+    component: RecommendationDetail,
+    props:true,
+    beforeEnter:routeProtection
   }
 
 
