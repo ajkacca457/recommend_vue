@@ -54,4 +54,9 @@ img {
     font-size:25px;
 }
 
+a {
+    text-decoration: none;
+    color:black;
+}
+
 </style>
