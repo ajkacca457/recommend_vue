@@ -17,7 +17,6 @@ let getSingleCollection=(docid)=> {
         isPending.value= true;
 
         try {
-            isPending.value= true;
             let docReference=doc(db,"reccollection",id) 
             let response=await getDoc(docReference);    
 
