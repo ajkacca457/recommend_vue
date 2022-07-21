@@ -19,7 +19,17 @@
                            <button class="bg-danger rounded border-0 p-2 text-white" @click="handleDelete">Delete Collection</button>
                         </div>
                         </div>
-                    </div>  
+                    </div>
+
+                    <div class="col-4">
+                        <h3>List of recommmendations:</h3>
+                    </div>
+
+                    <div class="col-4">
+                        <AddRecommendation/>
+                    </div>
+                    
+
             </div>   
             
 
@@ -40,9 +50,13 @@ import getCurrentUser from "../composibles/getcurrentUser";
 import { computed } from '@vue/runtime-core';
 import deleteCollection from "../composibles/deleteCollection";
 import updateStorage from "../composibles/updateStorage";
+import AddRecommendation from "../components/AddRecommendation.vue";
 
 export default {
     name: "RecommendationDetail",
+    components: {
+        AddRecommendation
+    },
     setup() {
 
         let route= useRoute();

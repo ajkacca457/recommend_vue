@@ -37,8 +37,6 @@ const updateStorage=()=> {
             }
         }
 
-
-
     
         return {
             url,filePath, uploadImage, deleteImage
