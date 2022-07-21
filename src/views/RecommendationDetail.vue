@@ -15,7 +15,8 @@
                         <p class="m-0 text-end">Created By : {{document.creator}}</p>
                         <p class="m-0 text-end">Category : {{document.category}}</p>
                         <div v-if="owenerShip">
-                        <button class="bg-danger rounded border-0 p-2 text-white">Delete Collection</button>
+                            <div v-if="isDeletePending">Deleteing...</div>
+                           <button class="bg-danger rounded border-0 p-2 text-white" @click="handleDelete">Delete Collection</button>
                         </div>
                         </div>
                     </div>  
@@ -33,20 +34,24 @@
 </template>
 
 <script>
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import getSingleCollection from "../composibles/getSingleCollection";
 import getCurrentUser from "../composibles/getcurrentUser";
 import { computed } from '@vue/runtime-core';
+import deleteCollection from "../composibles/deleteCollection";
 
 export default {
     name: "RecommendationDetail",
     setup() {
 
         let route= useRoute();
+        let router= useRouter();
         
         let { user }= getCurrentUser();
 
         let {error,isPending,document}=getSingleCollection(route.params.id);
+
+        let {delerror,isDeletePending, deleteItem}= deleteCollection();
 
         let owenerShip= computed(()=> {
             if(user.value && document.value && user.value.uid===document.value.userId) {
@@ -54,8 +59,17 @@ export default {
             } 
         })
 
+        let handleDelete=async()=> {
+            if(!delerror.value) {
+                await deleteItem(route.params.id);
+            }
+            router.push({
+                name:"Home"
+            })
+        }
+
         return {
-           error, isPending, document, owenerShip
+           error, isPending, document, owenerShip,handleDelete, isDeletePending
         }
       
     }
