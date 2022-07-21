@@ -9,13 +9,9 @@ let getCollections=()=> {
     let isPending= ref(false);
     let documents= ref([]);
 
-
-    let collectDocs=  ()=> {
-        error.value= null;
-        isPending.value= true;
-
-            let q= query(RecCollectionRef,orderBy("createdAt"));
-            let unsub=onSnapshot(q,(snapshot)=> {
+    let q= query(RecCollectionRef,orderBy("createdAt"));
+            let unsub=onSnapshot(q,(snapshot)=> { 
+                isPending.value=true;
                 let results=[];
                 snapshot.docs.forEach(doc=> {
                 results.push({...doc.data(), id:doc.id})
@@ -33,11 +29,6 @@ let getCollections=()=> {
          watchEffect((oninvalidate)=> {
             oninvalidate(()=>unsub());
          })   
-
-    }
-
-    collectDocs();
-
 
     return {
         error,

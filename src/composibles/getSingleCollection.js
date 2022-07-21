@@ -1,50 +1,45 @@
-import { getDoc,doc } from "firebase/firestore";
-import { ref } from "vue";
-import { app, db } from "../firebase/config";
+import { onSnapshot,doc } from "firebase/firestore";
+import { ref, watchEffect } from "vue";
+import {app,db} from "../firebase/config";
+
 
 
 let getSingleCollection=(docid)=> {
 
-    let error= ref(null);
+        let error= ref(null);
+        let isPending= ref(null);
 
-    let isPending= ref(false);
+        let document= ref(null);
 
-    let document= ref(null);
+        let documentReference= doc(db,"reccollection", docid)
 
 
-    let collectSingleDoc= async(id)=> {
-        error.value= null;
-        isPending.value= true;
+      let unsub=onSnapshot(documentReference,(snapshot)=> {
+              isPending.value=true;
+                if(snapshot.data()) {
+                    document.value= {...snapshot.data(), id:snapshot.id};
+                    error.value= null;
+                    isPending.value=false;
+                } else {
+                    isPending.value=true;
+                    error.value="the document doesnt exists";
+                }              
 
-        try {
-            let docReference=doc(db,"reccollection",id) 
-            let response=await getDoc(docReference);    
-
-            if(!response) {
-                throw new Error("Collections are unavailable at the moment.")
-            }
-            
-            document.value=response.data();
+        }, (err)=> {
+            error.value=err.message;
             isPending.value=false;
-            error.value= null;
-
-        } catch (err) {
-            
-            error.value= err.message;
-            isPending.value=false;
-        }
-
-    }
-
-    collectSingleDoc(docid);
+        })
 
 
-    return {
-        error,
-        isPending,
-        document
-    }
+        watchEffect((onInvalidate)=> {
+            onInvalidate(()=> unsub());
+        })
+
+
+    return {error, isPending, document};
+
 
 }
+
 
 export default getSingleCollection;
