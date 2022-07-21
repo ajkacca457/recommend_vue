@@ -14,6 +14,9 @@
                         <p class="m-0 text-center">{{document.info}}</p>
                         <p class="m-0 text-end">Created By : {{document.creator}}</p>
                         <p class="m-0 text-end">Category : {{document.category}}</p>
+                        <div v-if="owenerShip">
+                        <button class="bg-danger rounded border-0 p-2 text-white">Delete Collection</button>
+                        </div>
                         </div>
                     </div>  
             </div>   
@@ -32,6 +35,8 @@
 <script>
 import { useRoute } from 'vue-router';
 import getSingleCollection from "../composibles/getSingleCollection";
+import getCurrentUser from "../composibles/getcurrentUser";
+import { computed } from '@vue/runtime-core';
 
 export default {
     name: "RecommendationDetail",
@@ -39,13 +44,18 @@ export default {
 
         let route= useRoute();
         
+        let { user }= getCurrentUser();
+
         let {error,isPending,document}=getSingleCollection(route.params.id);
 
-        console.log(document);
+        let owenerShip= computed(()=> {
+            if(user.value && document.value && user.value.uid===document.value.userId) {
+                return true;
+            } 
+        })
 
-        let  id = route.params.id;
         return {
-            isPending, document
+           error, isPending, document, owenerShip
         }
       
     }
@@ -61,6 +71,8 @@ export default {
 }
 img {
     max-width:100%;
+    max-height: 100%;
+    object-fit: fill;
 }
 
 </style>
