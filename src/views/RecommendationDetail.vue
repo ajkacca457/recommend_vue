@@ -39,6 +39,7 @@ import getSingleCollection from "../composibles/getSingleCollection";
 import getCurrentUser from "../composibles/getcurrentUser";
 import { computed } from '@vue/runtime-core';
 import deleteCollection from "../composibles/deleteCollection";
+import updateStorage from "../composibles/updateStorage";
 
 export default {
     name: "RecommendationDetail",
@@ -53,6 +54,8 @@ export default {
 
         let {delerror,isDeletePending, deleteItem}= deleteCollection();
 
+        let { deleteImage }= updateStorage();
+
         let owenerShip= computed(()=> {
             if(user.value && document.value && user.value.uid===document.value.userId) {
                 return true;
@@ -61,6 +64,7 @@ export default {
 
         let handleDelete=async()=> {
             if(!delerror.value) {
+                await deleteImage(document.value.filePath);
                 await deleteItem(route.params.id);
             }
             router.push({

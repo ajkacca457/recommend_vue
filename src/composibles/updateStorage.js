@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import {  ref as storageRef ,uploadBytes,getDownloadURL} from "firebase/storage"
+import {  ref as storageRef ,uploadBytes,getDownloadURL,deleteObject} from "firebase/storage"
 import getCurrentUser from "./getcurrentUser";
 import { projectStorage } from "../firebase/config";
 
@@ -26,10 +26,22 @@ const updateStorage=()=> {
 
         }
 
+        const deleteImage=async(filePath)=> {
+            const imageRef= storageRef(projectStorage,filePath);
+            try {
+                let res= await deleteObject(imageRef);
+                error.value=null;
+
+            } catch (err) {
+                error.value=err.message;
+            }
+        }
+
+
+
     
         return {
-            url,filePath, uploadImage
-
+            url,filePath, uploadImage, deleteImage
         }
           
 
