@@ -7,15 +7,13 @@
     <div v-if="document">
         <div class="detail">
              <div class="row">
-                  <div class="col-6 card p-2">
-                       <div class="d-flex justify-content-between align-items-center">
+                  <div class="col-4 card p-2">
+                       <div>
                         <img :src="document.imageUrl" alt="">
-                        <h4>{{document.name}}</h4>
-                        </div>
-                        <div>
-                        <p class="mt-2">{{document.info}}</p>
-                        <p class="m-0">Created By : {{document.creator}}</p>
-                        <p>Category : {{document.category}}</p>
+                        <h4 class="text-center mt-2">{{document.name}}</h4>
+                        <p class="m-0 text-center">{{document.info}}</p>
+                        <p class="m-0 text-end">Created By : {{document.creator}}</p>
+                        <p class="m-0 text-end">Category : {{document.category}}</p>
                         </div>
                     </div>  
             </div>   
@@ -23,6 +21,10 @@
 
         </div>
     </div>
+    <div v-if="error">
+        <p class="bg-danger text-center">{{error}}</p>
+    </div>
+
     </div>
 
 </template>
@@ -58,8 +60,7 @@ export default {
   margin: 1% auto;
 }
 img {
-    max-width: 100px;
-    max-height: 100px;
+    max-width:100%;
 }
 
 </style>
