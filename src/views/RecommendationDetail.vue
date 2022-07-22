@@ -11,9 +11,8 @@
                        <div>
                         <img :src="document.imageUrl" alt="">
                         <h4 class="text-center mt-2">{{document.name}}</h4>
-                        <p class="m-0 text-center">{{document.info}}</p>
-                        <p class="m-0 text-end">Created By : {{document.creator}}</p>
-                        <p class="m-0 text-end">Category : {{document.category}}</p>
+                        <p class="m-0 text-justify">{{document.info}}</p>
+                        <p class="my-2 text-secondary" style="font-size:18px; font-weight:bold">In {{document.category}} category created by {{document.creator}}.</p>
                         <div v-if="owenerShip">
                             <div v-if="isDeletePending">Deleteing...</div>
                            <button class="bg-danger rounded border-0 p-2 text-white" @click="handleDelete">Delete Collection</button>
