@@ -30,7 +30,9 @@
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
+import { ref } from '@vue/reactivity';
+import { v4 as uuidv4 } from 'uuid';
+
 export default {
     name:"AddRecommendation",
 
@@ -40,7 +42,16 @@ export default {
         let rating= ref(null);
 
         let handleSubmit=()=> {
-          console.log(title.value, info.value, rating.value);
+
+          let newRecommendation= {
+            id: uuidv4(), 
+            title: title.value,
+            info: info.value,
+            rating: rating.value
+          }
+
+          console.log(newRecommendation);
+
         }
 
     return {

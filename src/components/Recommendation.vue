@@ -10,8 +10,10 @@
 
 <script>
 export default {
+    
     name:"Recommendation"
 }
+
 </script>
 
 <style>
