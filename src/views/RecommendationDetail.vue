@@ -20,8 +20,11 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6 col-md-4 col-12">
-                        <h3>List of recommmendations:</h3>
+                    <div class="col-lg-6 col-md-4 col-12 
+                                mt-4 mt-md-0 mt-lg-0
+                                mb-4 mb-md-0 mb-lg-0">
+                        <h4>Available Recommendations: </h4>
+                        <Recommendation />
                     </div>
 
                     <div class="col-12 col-md-4 col-lg-3">
@@ -50,11 +53,13 @@ import { computed } from '@vue/runtime-core';
 import deleteCollection from "../composibles/deleteCollection";
 import updateStorage from "../composibles/updateStorage";
 import AddRecommendation from "../components/AddRecommendation.vue";
+import Recommendation from "../components/Recommendation.vue";
 
 export default {
     name: "RecommendationDetail",
     components: {
-        AddRecommendation
+        AddRecommendation,
+        Recommendation
     },
     setup() {
 

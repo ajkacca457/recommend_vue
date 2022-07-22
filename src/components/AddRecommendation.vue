@@ -12,6 +12,15 @@
     <input type="text" class="form-control" id="Recinfo" placeholder="Recommendation info" v-model="info">
   </div>
 
+  <div class="form-group">
+      <label for="Rating" class="mb-2">Rating:</label>
+      <select id="Rating" class="form-control mb-4" v-model="rating">
+        <option selected>Recommended</option>
+        <option>Must Try</option>
+        <option>Time Pass</option>
+      </select>
+    </div>
+
     <input type="submit" class="mt-4 bg-success text-white border-0 rounded w-25"/> 
 
     </form>
@@ -28,13 +37,14 @@ export default {
     setup() {
         let title= ref(null);
         let info= ref(null);
+        let rating= ref(null);
 
         let handleSubmit=()=> {
-          console.log(title.value, info.value);
+          console.log(title.value, info.value, rating.value);
         }
 
     return {
-      title, info, handleSubmit
+      title, info,rating,handleSubmit
     }
 
 
