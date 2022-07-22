@@ -12,7 +12,7 @@
                         <img :src="document.imageUrl" alt="">
                         <h4 class="text-center mt-2">{{document.name}}</h4>
                         <p class="m-0 text-justify">{{document.info}}</p>
-                        <p class="my-2 text-secondary" style="font-size:18px; font-weight:bold">In {{document.category}} category created by {{document.creator}}.</p>
+                        <div class="d-flex justify-content-between"><p class="my-2 text-secondary" >Category : {{document.category}}</p> <p class="my-2 text-secondary">Owener : {{document.creator}}</p></div>
                         <div v-if="owenerShip">
                             <div v-if="isDeletePending">Deleteing...</div>
                            <button class="bg-danger rounded border-0 p-2 text-white" @click="handleDelete">Delete Collection</button>
