@@ -1,6 +1,6 @@
 <template>
 <router-link :to="{name:'RecommendationDetail', params: {id:recommendation.id} }" >
-    <div class=" h-100 d-flex justify-content-between" id="card">
+    <div class=" h-100 d-flex justify-content-between mt-2" id="card">
         <div class="d-flex">
         <img :src="recommendation.imageUrl" :alt="recommendation.name">
         <div class="my-2">

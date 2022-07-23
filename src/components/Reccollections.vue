@@ -136,5 +136,10 @@ export default {
   grid-gap: 10px;
 
 }
+@media only screen and (max-width: 728px) {
+ .col_container {
+  display: block;
+}
+}
 
 </style>
