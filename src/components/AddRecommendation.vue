@@ -64,12 +64,14 @@ export default {
 
           let notice= document.querySelector(".notice");
 
-          setTimeout(()=> {
             notice.classList.remove("d-none");
+
+          setTimeout(()=> {
+            notice.classList.add("d-none");
           },1000)
 
           console.log(props.collection);
-          
+
           title.value=null;
           info.value=null;
           rating.value=null;
