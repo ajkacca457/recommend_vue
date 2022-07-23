@@ -4,7 +4,7 @@
         <p>{{info}}</p>
         <p class="bg-warning text-center py-2">Rating: {{rating}}</p>
         
-        <button v-if="hasOwener" class="bg-danger w-25 border-0 rounded">Delete</button>
+        <button v-if="hasOwener" class="bg-danger w-25 border-0 rounded text-white">Delete</button>
 
     </div>
 

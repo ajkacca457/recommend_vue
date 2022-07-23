@@ -31,15 +31,18 @@
 import { ref } from '@vue/reactivity';
 import userLogout from "../composibles/userLogout";
 import getCurrentUser from "../composibles/getcurrentUser";
+import { useRouter } from 'vue-router';
 export default {
   name:"Navbar",
     setup() {
 
       let {error, logout} = userLogout();
       let {user}= getCurrentUser();
+      let router= useRouter();
 
       let handleLogout= async()=> {
           await logout();
+          router.push({name: "Home"});
       }
 
 

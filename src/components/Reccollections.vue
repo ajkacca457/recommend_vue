@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="user"><p>Hello, <strong>{{user.displayName}}</strong></p> </div>
-    <div v-else><p>Hello, <strong>Guest!</strong></p> </div>
+    <div v-else><p>Hello, <strong>Guest!</strong> login or register to watch all the recommendations.</p> </div>
     
     <div v-if="isPending" class="text-center mt-5">
         <img src="../assets/img/Hourglass.gif" alt="">
