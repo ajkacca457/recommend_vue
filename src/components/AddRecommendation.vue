@@ -21,6 +21,9 @@
       </select>
     </div>
 
+    <p class="notice bg-success text-white p-2 d-none">Your recommendation has been added to the list.</p>
+
+
     <input type="submit" class="mt-4 bg-success text-white border-0 rounded w-25"/> 
 
     </form>
@@ -32,16 +35,21 @@
 <script>
 import { ref } from '@vue/reactivity';
 import { v4 as uuidv4 } from 'uuid';
+import deleteCollection from "../composibles/deleteCollection";
 
 export default {
     name:"AddRecommendation",
+    props: ["collection"],
 
-    setup() {
+    setup(props) {
+
+      let { updateItem }= deleteCollection();
+
         let title= ref(null);
         let info= ref(null);
         let rating= ref(null);
 
-        let handleSubmit=()=> {
+        let handleSubmit=async ()=> {
 
           let newRecommendation= {
             id: uuidv4(), 
@@ -50,7 +58,21 @@ export default {
             rating: rating.value
           }
 
-          console.log(newRecommendation);
+          await updateItem(props.collection.id, {
+            recommendations: [...props.collection.recommendations,newRecommendation]
+          })
+
+          let notice= document.querySelector(".notice");
+
+          setTimeout(()=> {
+            notice.classList.remove("d-none");
+          },1000)
+
+          console.log(props.collection);
+          
+          title.value=null;
+          info.value=null;
+          rating.value=null;
 
         }
 
