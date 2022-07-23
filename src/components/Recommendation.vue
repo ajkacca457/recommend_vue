@@ -1,8 +1,11 @@
 <template>
-    <div class="card p-2">
-        <h4>Here is the title</h4>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui dolore error ex nobis. A quidem accusantium quia atque commodi eos eveniet nesciunt similique error, vero, pariatur aut inventore ducimus cumque!</p>
-        <p class="bg-warning text-center py-2">Rating: Must Try</p>
+    <div class="card p-2 mt-3">
+        <h4>{{title}}</h4>
+        <p>{{info}}</p>
+        <p class="bg-warning text-center py-2">Rating: {{rating}}</p>
+        
+        <button v-if="hasOwener" class="bg-danger w-25 border-0 rounded">Delete</button>
+
     </div>
 
 
@@ -10,10 +13,17 @@
 
 <script>
 export default {
-    
-    name:"Recommendation"
-}
+    name:"Recommendation",
+    props:["item", "hasOwener"],
+    setup(props) {            
+        let {title, info, rating}= props.item;
+        let hasOwener= props.hasOwener;    
+        return {
+            title,info,rating, hasOwener
+        }
 
+    }
+}
 </script>
 
 <style>

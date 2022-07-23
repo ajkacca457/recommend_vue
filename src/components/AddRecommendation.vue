@@ -21,7 +21,7 @@
       </select>
     </div>
 
-    <p class="notice bg-success text-white p-2 d-none">Your recommendation has been added to the list.</p>
+    <p class="notice bg-success text-white p-2 d-none rounded">Your recommendation has been added to the list.</p>
 
 
     <input type="submit" class="mt-4 bg-success text-white border-0 rounded w-25"/> 

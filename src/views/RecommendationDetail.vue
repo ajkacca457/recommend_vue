@@ -24,7 +24,17 @@
                                 mt-4 mt-md-0 mt-lg-0
                                 mb-4 mb-md-0 mb-lg-0">
                         <h4>Available Recommendations: </h4>
-                        <Recommendation />
+                        
+                        <div v-if="!document.recommendations.length">
+                            <p class="bg-danger text-white p-1">No Recommednations are available for this collection.</p>
+                        </div>
+
+                        <div v-if="document.recommendations.length">
+                            <div v-for="recommendation in document.recommendations">
+                                <Recommendation :item="recommendation" :hasOwener="owenerShip" :key="recommendation.id" />
+                            </div>
+
+                        </div>                        
                     </div>
 
                     <div class="col-12 col-md-4 col-lg-3">
