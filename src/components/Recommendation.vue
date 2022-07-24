@@ -4,7 +4,7 @@
         <p>{{info}}</p>
         <p class="bg-warning text-center py-2">Rating: {{rating}}</p>
         
-        <button v-if="hasOwener" class="bg-danger w-25 border-0 rounded text-white">Delete</button>
+        <button v-if="hasOwener" class="bg-danger w-25 border-0 rounded text-white" @click="handleDelete">Delete</button>
 
     </div>
 
@@ -15,11 +15,16 @@
 export default {
     name:"Recommendation",
     props:["item", "hasOwener"],
-    setup(props) {            
-        let {title, info, rating}= props.item;
-        let hasOwener= props.hasOwener;    
+    setup(props,context) {            
+        let {id,title, info, rating}= props.item;
+        let hasOwener= props.hasOwener;
+        
+        let handleDelete=()=> {
+            context.emit("deleteRecommendation", id);
+        }
+        
         return {
-            title,info,rating, hasOwener
+            title,info,rating, hasOwener,handleDelete
         }
 
     }

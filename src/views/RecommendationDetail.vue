@@ -31,7 +31,7 @@
 
                         <div v-if="document.recommendations.length">
                             <div v-for="recommendation in document.recommendations">
-                                <Recommendation :item="recommendation" :hasOwener="owenerShip" :key="recommendation.id" />
+                                <Recommendation :item="recommendation" :hasOwener="owenerShip" :key="recommendation.id" @deleteRecommendation="deleteRec" />
                             </div>
 
                         </div>                        
@@ -80,7 +80,7 @@ export default {
 
         let {error,isPending,document}=getSingleCollection(route.params.id);
 
-        let {delerror,isDeletePending, deleteItem}= deleteCollection();
+        let {delerror,isDeletePending, deleteItem, updateItem}= deleteCollection();
 
         let { deleteImage }= updateStorage();
 
@@ -100,8 +100,15 @@ export default {
             })
         }
 
+        let deleteRec= async(id)=> {
+            let updatedRecs= document.value.recommendations.filter(item=> item.id!==id);
+            await updateItem(document.value.id, {
+                recommendations:updatedRecs
+            });
+        }
+
         return {
-           error, isPending, document, owenerShip,handleDelete, isDeletePending
+           error, isPending, document, owenerShip,handleDelete, isDeletePending,deleteRec
         }
       
     }
