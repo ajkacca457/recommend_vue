@@ -1,15 +1,20 @@
-import { onSnapshot, orderBy, query } from "firebase/firestore";
+import { onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { ref, watchEffect } from "vue";
 import { app, RecCollectionRef } from "../firebase/config";
 
 
-let getCollections=()=> {
+let getCollections=(myquery)=> {
 
     let error= ref(null);
     let isPending= ref(false);
     let documents= ref([]);
 
     let q= query(RecCollectionRef,orderBy("createdAt"));
+
+        if(myquery) {
+             q= query(RecCollectionRef,where(myquery[0],myquery[1],myquery[2]));
+        }
+
             let unsub=onSnapshot(q,(snapshot)=> { 
                 isPending.value=true;
                 let results=[];
