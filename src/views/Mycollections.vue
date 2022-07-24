@@ -1,6 +1,6 @@
 <template>
     <div class="mycollection">
-        <h4 class="bg-warning p-1 text-center"> Hello! {{user.displayName}}. Collections that you own are: </h4>
+        <h4 class="bg-warning p-1 text-center"> Hello! {{user.displayName}}. List of your collections: </h4>
 
     <div v-if="isPending" class="text-center mt-5">
         <img src="../assets/img/Hourglass.gif" alt="">
