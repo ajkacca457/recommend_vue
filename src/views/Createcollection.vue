@@ -1,6 +1,6 @@
 <template>
   
-<form class="w-25 my-5 mx-auto" id="createform" @submit.prevent="handleCollection">
+<form class="my-5 mx-auto" id="createform" @submit.prevent="handleCollection">
 
 <div class="logo d-flex align-items-center justify-content-center">
 <font-awesome-icon icon="pen-fancy" />
@@ -122,6 +122,14 @@ export default {
     background-color:#ffe0e8; ;
     padding: 1%;
     border-radius: 5px;
+    width:25%;
 }
+
+@media only screen and (max-width: 900px) {
+ #createform {
+  width:75%
+}
+}
+
 
 </style>

@@ -21,6 +21,7 @@
       </select>
     </div>
 
+    <p class="errornotice bg-danger text-white p-2 d-none rounded">You need provide title and information</p>
     <p class="notice bg-success text-white p-2 d-none rounded">Your recommendation has been added to the list.</p>
 
 
@@ -58,13 +59,24 @@ export default {
             rating: rating.value
           }
 
-          await updateItem(props.collection.id, {
+          let errornotice= document.querySelector(".errornotice");
+          
+          if(title.value===null||info.value===null||rating.value===null) {
+            errornotice.classList.remove("d-none");
+
+          setTimeout(()=> {
+            errornotice.classList.add("d-none");
+          },1000)
+
+          } else {
+
+            await updateItem(props.collection.id, {
             recommendations: [...props.collection.recommendations,newRecommendation]
           })
 
           let notice= document.querySelector(".notice");
 
-            notice.classList.remove("d-none");
+          notice.classList.remove("d-none");
 
           setTimeout(()=> {
             notice.classList.add("d-none");
@@ -75,13 +87,13 @@ export default {
           title.value=null;
           info.value=null;
           rating.value=null;
+          }
 
         }
 
     return {
       title, info,rating,handleSubmit
     }
-
 
     }
 

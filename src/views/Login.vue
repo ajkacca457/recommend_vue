@@ -6,7 +6,7 @@
 
 <div v-else>
 
-<form class="w-25 my-5 mx-auto" id="loginform" @submit.prevent="handleLogin">
+<form class="my-5 mx-auto" id="loginform" @submit.prevent="handleLogin">
 
 <div class="logo d-flex align-items-center justify-content-center">
 <font-awesome-icon icon="arrow-right-to-bracket"/>
@@ -80,6 +80,17 @@ export default {
     background-color:#ffe0e8; ;
     padding: 1%;
     border-radius: 5px;
+    width:25%;
 }
+
+@media only screen and (max-width: 900px) {
+ #loginform {
+  width:75%
+}
+}
+
+
+
+
 
 </style>
