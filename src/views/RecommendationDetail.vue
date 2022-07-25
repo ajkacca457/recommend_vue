@@ -30,14 +30,14 @@
                         </div>
 
                         <div v-if="document.recommendations.length">
-                            <div v-for="recommendation in document.recommendations">
+                            <div v-for="recommendation in sortedRecommendations">
                                 <Recommendation :item="recommendation" :hasOwener="owenerShip" :key="recommendation.id" @deleteRecommendation="deleteRec" />
                             </div>
 
                         </div>                        
                     </div>
 
-                    <div class="col-12 col-md-4 col-lg-3">
+                    <div v-if="owenerShip" class="col-12 col-md-4 col-lg-3">
                         <AddRecommendation :collection="document"/>
                     </div>
                     
@@ -84,6 +84,13 @@ export default {
 
         let { deleteImage }= updateStorage();
 
+
+        let sortedRecommendations= computed(()=>{
+            return document.value.recommendations.reverse()
+        });
+
+        console.log(sortedRecommendations);
+
         let owenerShip= computed(()=> {
             if(user.value && document.value && user.value.uid===document.value.userId) {
                 return true;
@@ -108,7 +115,8 @@ export default {
         }
 
         return {
-           error, isPending, document, owenerShip,handleDelete, isDeletePending,deleteRec
+           error, isPending, document, owenerShip,handleDelete, isDeletePending,deleteRec,
+           sortedRecommendations
         }
       
     }
