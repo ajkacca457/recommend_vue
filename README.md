@@ -37,11 +37,11 @@ To get a local copy up and running follow these simple example steps.
 - Git installed in your local machine
 ```
 
-🔌Live Link
+<h2>🔌Live Link</h2>
 
 [Recommend](https://recommend-v1.netlify.app/)
 
-👤 Author1
+<h2>👤 Author1</h2>
 
 [Github](https://github.com/ajkacca457)
 
